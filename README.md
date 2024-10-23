@@ -22,4 +22,4 @@ cd ./codes/FedHGNN
 python main.py --dataset acm --shared_num 20 --p1 1 --p2 1 --lr 0.01 --device cuda:0
 ```
 
-
+This is a code for SSSjkkk
