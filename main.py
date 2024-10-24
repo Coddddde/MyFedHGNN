@@ -87,7 +87,7 @@ meta_paths_dict = {'acm':{'user': [['pa','ap'],['pc','cp']],'item':[['ap','pa']]
                    'yelp':{'user': [['pa','ap'], ['pa','aca','caa', 'ap']],'item':[['ap', 'pa']]}, \
                    'DoubanBook':{'item':[['bu','ub'],['bg', 'gb']], 'user':[['ub','bu'],['ua','au']]}}
 
-data_path = '../../data/ACM/ACM.mat'
+data_path = './data/ACM/ACM.mat'
 data = sio.loadmat(data_path)
 p_vs_f = data['PvsL']
 p_vs_a = data['PvsA']#(12499, 17431)

@@ -1,7 +1,7 @@
 #coding:utf-8
 import numpy as np
 from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import scipy.io as sio
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -36,7 +36,7 @@ def softmax(x):
 
 '''cluster'''
 def cluster(feature_list, n_clusters):
-    s = KMeans(n_clusters=n_clusters).fit(feature_list)
+    s = KMeans(n_clusters=n_clusters).fit(np.asarray(feature_list))
     #print(len(s.cluster_centers_))
     #每个样本所属的簇
     #print(len(s.labels_))
@@ -82,7 +82,7 @@ def get_shared_knowledge_rep(item_feature_list, label_author):
         # for author in author_list:
         #     sum+= item_feature_list[author]
         # rep = sum/l
-        shared_knowledge_rep[label] = rep
+        shared_knowledge_rep[label] = np.asarray(rep)
     return shared_knowledge_rep
 
 
@@ -108,7 +108,7 @@ def tsne(feature_list):
 # x= l['x']
 # y =l['y']
 
-
+'''
 def plot_embedding_2d(x, y, labels):
     """Plot an embedding X with the class label y colored by the domain d."""
     # x_min, x_max = np.min(X, 0), np.max(X, 0)
@@ -121,7 +121,7 @@ def plot_embedding_2d(x, y, labels):
     # plt.ylim((-1.5, 1.5))
     # plt.yticks([])  # ignore yticks
     plt.show()
-
+'''
 #plot_embedding_2d(x,y)
 
 

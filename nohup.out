@@ -1,0 +1,99 @@
+Traceback (most recent call last):
+  File "main.py", line 1, in <module>
+    from client import Client
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/client.py", line 7, in <module>
+    from util import *
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/util.py", line 4, in <module>
+    import matplotlib.pyplot as plt
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/matplotlib/__init__.py", line 125, in <module>
+    from packaging.version import parse as parse_version
+ModuleNotFoundError: No module named 'packaging'
+Traceback (most recent call last):
+  File "main.py", line 1, in <module>
+    from client import Client
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/client.py", line 7, in <module>
+    from util import *
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/util.py", line 4, in <module>
+    import matplotlib.pyplot as plt
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/matplotlib/__init__.py", line 125, in <module>
+    from packaging.version import parse as parse_version
+ModuleNotFoundError: No module named 'packaging'
+Traceback (most recent call last):
+  File "main.py", line 1, in <module>
+    from client import Client
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/client.py", line 7, in <module>
+    from util import *
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/util.py", line 4, in <module>
+    import matplotlib.pyplot as plt
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/matplotlib/pyplot.py", line 55, in <module>
+    from matplotlib import rcsetup, style
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/matplotlib/style/__init__.py", line 1, in <module>
+    from .core import available, context, library, reload_library, use
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/matplotlib/style/core.py", line 26, in <module>
+    import importlib_resources
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/__init__.py", line 3, in <module>
+    from ._common import (
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/_common.py", line 15, in <module>
+    from .future.adapters import wrap_spec
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/future/adapters.py", line 5, in <module>
+    from .. import readers, _adapters
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/readers.py", line 12, in <module>
+    from .compat.py39 import ZipPath
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/compat/py39.py", line 10, in <module>
+    from zipp import Path as ZipPath  # type: ignore
+ImportError: cannot import name 'Path' from 'zipp' (unknown location)
+Traceback (most recent call last):
+  File "main.py", line 1, in <module>
+    from client import Client
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/client.py", line 7, in <module>
+    from util import *
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/util.py", line 4, in <module>
+    import matplotlib.pyplot as plt
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/matplotlib/pyplot.py", line 55, in <module>
+    from matplotlib import rcsetup, style
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/matplotlib/style/__init__.py", line 1, in <module>
+    from .core import available, context, library, reload_library, use
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/matplotlib/style/core.py", line 26, in <module>
+    import importlib_resources
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/__init__.py", line 3, in <module>
+    from ._common import (
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/_common.py", line 15, in <module>
+    from .future.adapters import wrap_spec
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/future/adapters.py", line 5, in <module>
+    from .. import readers, _adapters
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/readers.py", line 12, in <module>
+    from .compat.py39 import ZipPath
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/importlib_resources/compat/py39.py", line 10, in <module>
+    from zipp import Path as ZipPath  # type: ignore
+ImportError: cannot import name 'Path' from 'zipp' (unknown location)
+Using backend: pytorch
+use: cuda:0
+Traceback (most recent call last):
+  File "main.py", line 33, in <module>
+    print_log(args.log_dir+file)
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/util.py", line 18, in print_log
+    logging.FileHandler(file, mode='w'),  # 输出到文件
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/logging/__init__.py", line 1147, in __init__
+    StreamHandler.__init__(self, self._open())
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/logging/__init__.py", line 1176, in _open
+    return open(self.baseFilename, self.mode, encoding=self.encoding)
+FileNotFoundError: [Errno 2] No such file or directory: '/shenjiakui/MyFedHGNN/log/main_1729758345.80578'
+Using backend: pytorch
+2024-10-24 16:30:24,970 - INFO - 信息会同时显示在终端和文件中。
+use: cuda:0
+Traceback (most recent call last):
+  File "main.py", line 102, in <module>
+    label_count, labels, label_author, author_label, shared_knowledge_rep = gen_shared_knowledge(adj, args.shared_num)#
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/util.py", line 144, in gen_shared_knowledge
+    label_count, labels, label_author, author_label = cluster(a_feature, group_num) #20
+  File "/shenjiakui/MyFedHGNN/codes/FedHGNN/util.py", line 39, in cluster
+    s = KMeans(n_clusters=n_clusters).fit(feature_list)
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/sklearn/base.py", line 1152, in wrapper
+    return fit_method(estimator, *args, **kwargs)
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/sklearn/cluster/_kmeans.py", line 1475, in fit
+    X = self._validate_data(
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/sklearn/base.py", line 605, in _validate_data
+    out = check_array(X, input_name="X", **check_params)
+  File "/shenjiakui/opt/opt/conda/envs/cu110/lib/python3.8/site-packages/sklearn/utils/validation.py", line 751, in check_array
+    raise TypeError(
+TypeError: np.matrix is not supported. Please convert to a numpy array with np.asarray. For more information see: https://numpy.org/doc/stable/reference/generated/numpy.matrix.html

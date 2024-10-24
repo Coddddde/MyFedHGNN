@@ -18,7 +18,7 @@ def parse_args():
     parser.add_argument('--num_sample', type=int, default=0, help='number of sampled neighbors.')
     parser.add_argument('--valid_step', type=int, default=5, help='valid step.')
     parser.add_argument('--nonlinearity', type=str, default="relu", help='Which device to run the model.')
-    parser.add_argument('--log_dir', type=str, default="../../log/", help='Which device to run the model.')
+    parser.add_argument('--log_dir', type=str, default="./log/", help='Which device to run the model.')
     parser.add_argument('--is_gcn', type=bool, default=False, help="whether using gcn")
     parser.add_argument('--is_attention', type=bool, default=False, help="whether using attention")
     parser.add_argument('--hetero', type=bool, default=True, help="whether using attention")
