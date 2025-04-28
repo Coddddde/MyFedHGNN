@@ -15,24 +15,6 @@ import random
 from util import *
 print("use:", torch.device(args.device))
 
-
-'''seed'''
-def setup_seed(seed):
-    torch.manual_seed(seed)
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-    np.random.seed(seed)
-    random.seed(seed)
-    torch.backends.cudnn.deterministic = True
-
-setup_seed(20211111)
-'''seed end'''
-
-'''log'''
-file = os.path.basename(sys.argv[0])[0:-3]+"_"+str(time())
-print_log(args.log_dir+file)
-'log end'
-
 def train_test_split(p_vs_a):
     train_id = []
     train_fed_id = []
@@ -78,6 +60,22 @@ def train_test_split(p_vs_a):
     #print(test_negative_id[2])
     return p_vs_a_, p_vs_a_random, train_fed_id, train_id, test_id, test_negative_id
 
+'''seed'''
+def setup_seed(seed):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    np.random.seed(seed)
+    random.seed(seed)
+    torch.backends.cudnn.deterministic = True
+
+setup_seed(20211111)
+'''seed end'''
+
+'''log'''
+file = os.path.basename(sys.argv[0])[0:-3]+"_"+str(time())
+print_log(args.log_dir+file)
+'log end'
 
 dataname = args.dataset
 device = args.device
@@ -89,9 +87,9 @@ meta_paths_dict = {'acm':{'user': [['pa','ap'],['pc','cp']],'item':[['ap','pa']]
 
 data_path = './data/ACM/ACM.mat'
 data = sio.loadmat(data_path)
-p_vs_f = data['PvsL']
+p_vs_f = data['PvsL']# (12499, 73)
 p_vs_a = data['PvsA']#(12499, 17431)
-p_vs_t = data['PvsT']
+p_vs_t = data['PvsT']#(12499, 1903)
 p_vs_c = data['PvsC']#(12499, 14)
 
 
@@ -100,34 +98,39 @@ p_vs_c = data['PvsC']#(12499, 14)
 
 adj = (p_vs_f, p_vs_a, p_vs_t, p_vs_c)
 label_count, labels, label_author, author_label, shared_knowledge_rep = gen_shared_knowledge(adj, args.shared_num)#
+# labels: author属于哪一类，label_author:{cluster:author}, author_label:{author:cluster}
+# shared_knowledge_rep: 每个cluster的representation,1*14,该类a-c的平均
 '''test end'''
 
 # We assign
 # (1) KDD papers as class 0 (data mining),
 # (2) SIGMOD and VLDB papers as class 1 (database),
 # (3) SIGCOMM and MOBICOMM papers as class 2 (communication)
-conf_ids = [0, 1, 9, 10, 13]
+conf_ids = [0, 1, 9, 10, 13] # 筛选只跟这5个会议有关系的论文，也就是4025的论文里面，相关会议至少有一个是这5个会议
 label_ids = [0, 1, 2, 2, 1]
 
 p_vs_c_filter = p_vs_c[:, conf_ids]#(12499, 5)
 p_selected = (p_vs_c_filter.sum(1) != 0).A1.nonzero()[0]
 # print(type(p_vs_c_filter.sum(1) != 0))
-p_vs_f = p_vs_f[p_selected]#(4025,73)
-p_vs_a = p_vs_a[p_selected]#(4025,17431)
-p_vs_t = p_vs_t[p_selected]#(4025,1903)
-p_vs_c = p_vs_c[p_selected]#CSC (4025, 14)
-
+p_vs_f = p_vs_f[p_selected]#(4025,73) field num:4025
+p_vs_a = p_vs_a[p_selected]#(4025,17431) author num:13407
+p_vs_t = p_vs_t[p_selected]#(4025,1903) num:340893
+p_vs_c = p_vs_c[p_selected]#CSC (4025, 14) conference num:4025
+# 12499篇论文筛选至4025篇
 
 
 num_nodes_dict = {'paper': p_vs_a.shape[0], 'author': p_vs_a.shape[1], 'field': p_vs_f.shape[1], 'conf': p_vs_c.shape[1]}
 
 
 p_vs_a, p_vs_a_random, train_fed_id, train_id, test_id, test_negative_id=train_test_split(p_vs_a)
-
+# train_fed_id: 4025(每篇论文可能有多个author) 
+# train_id: 4025*each_author_num=9703
+# test_id: 3704*1 (部分论文没有测试数据)
+# test_negative_id: 3704*99
 logging.info(args)
 logging.info(meta_paths_dict)
 
-
+# 初始化embedding参数
 #features_user = torch.FloatTensor(p_vs_t.toarray())
 features_user = np.random.normal(loc=0., scale=1., size=[p_vs_a.shape[0], args.in_dim])
 features_item = np.random.normal(loc=0., scale=1., size=[p_vs_a.shape[1], args.in_dim])
@@ -188,8 +191,8 @@ print(remain_edges/all_edges)
 hg = dgl.heterograph({
     ('paper', 'pa', 'author'): p_vs_a_.nonzero(),
     ('author', 'ap', 'paper'): p_vs_a_.transpose().nonzero(),
-    ('paper', 'pf', 'field'): p_vs_f.nonzero(),
-    ('field', 'fp', 'paper'): p_vs_f.transpose().nonzero(),
+    # ('paper', 'pf', 'field'): p_vs_f.nonzero(), #？？？？？？？？
+    # ('field', 'fp', 'paper'): p_vs_f.transpose().nonzero(),# ？？？？？？？？？
     ('paper', 'pc', 'conf'): p_vs_c.nonzero(),
     ('conf', 'cp', 'paper'): p_vs_c.transpose().nonzero(),
 }, num_nodes_dict = num_nodes_dict).to(device)

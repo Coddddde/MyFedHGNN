@@ -28,7 +28,7 @@ def parse_args():
     parser.add_argument('--local_train_num', type=int, default=1, help='Dim of latent vectors.')
     parser.add_argument('--agg_mode', type=str, default="add", help='Dim of latent vectors.')
     parser.add_argument('--agg_func', type=str, default="ATTENTION", help='Dim of latent vectors.')
-    parser.add_argument('--lr', type=float, default=0.01, help='Learning rate.')
+    parser.add_argument('--lr', type=float, default=0.0001, help='Learning rate.')
     parser.add_argument('--dropout', type=float, default=0, help='Dropout rate.')
     parser.add_argument('--weight_decay', type=float, default=0, help='lr weight_decay in optimizer.')
     parser.add_argument('--epochs', type=int, default=10000, help='Number of epochs.')
@@ -38,8 +38,8 @@ def parse_args():
     parser.add_argument('--clients_limit', type=float, default=0.1, help='Limit of proportion of malicious clients.')
     parser.add_argument('--items_limit', type=int, default=60, help='Limit of number of non-zero item gradients.')
     parser.add_argument('--type', type=str, default="ATTENTION", help='Dim of latent vectors.')
-    parser.add_argument('--p1', type=float, default=1, help='lr weight_decay in optimizer.')
-    parser.add_argument('--p2', type=float, default=1, help='lr weight_decay in optimizer.')
+    parser.add_argument('--p1', type=float, default=4, help='privacy budget ε1.')
+    parser.add_argument('--p2', type=float, default=4, help='privacy budget ε2.')
     return parser.parse_args()
 
 

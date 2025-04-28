@@ -57,6 +57,19 @@ class Client(nn.Module):
 
 
     def perturb_adj(self, value, label_author, author_label, label_count, shared_knowledge_rep, eps1, eps2):
+        """
+        *args* \n
+        @**value**: i-th user's interaction vector 1*num_items\n
+        @**label_author**: cluster-item mapping dict\n
+        @**author_label**: item-cluster mapping dict\n
+        @**shared_knowledge_rep**: cluster representation\n
+        @**eps1**: privacy budget for EM\n
+        @**eps2**: privacy budget for RR\n
+        *return*
+        @**value**: perturbed interaction vector\n
+        """
+        # labels: author(item)属于哪一类，label_author:{cluster:author}, author_label:{author:cluster}
+        # shared_knowledge_rep: 每个cluster的representation,1*14,该类a-c的平均
         #print(value.shape) #1,17431
         #此用户的item共可分成多少个groups
         groups = {}
@@ -140,9 +153,9 @@ class Client(nn.Module):
             value_rr[:, label_author[group_id]] = dprr_results[:, label_author[group_id]]
 
 
-        print('....')
-        print(self.item_id)
-        print(value_rr.nonzero()[1])
+        print(f"....{self.user_id}....")
+        print(f"True:\n{self.item_id}")
+        print(f"Pertubated:\n{value_rr.nonzero()[1]}") ##### 这里会打印一串采样
         return value_rr
 
 

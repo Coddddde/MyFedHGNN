@@ -7,7 +7,7 @@ class Server(nn.Module):
     def __init__(self, client_list, model, hg, features, args):
         super().__init__()
         self.device = args.device
-        self.hg = hg
+        self.hg = hg # 构建的异构图
         self.client_list = client_list
         self.features = features
         self.model_user = model[0]#(0:model_user, 1: model_item)
